@@ -34,4 +34,16 @@ const getPostById = async (req, res) => {
     }
   };
 
-export {addNewPost, getAllPosts, getPostById}
+const getPostsBySender = async (req, res) => {
+    const postSender = req.query.sender;
+    if (!postSender) return res.status(400).json({ error: 'Sender ID is required' });
+  
+    try {
+      const senderPosts = await postModel.find({senderID: postSender});
+      res.send(senderPosts);
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  };
+
+export {addNewPost, getAllPosts, getPostById, getPostsBySender}

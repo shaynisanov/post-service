@@ -6,6 +6,10 @@ const postSchema = new Schema({
         required: true,
     },
     content: String,
+    senderID: {
+        type: Number,
+        required: true,
+    },
     owner: {
         type: String,
         required: true,
