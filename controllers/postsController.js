@@ -46,4 +46,24 @@ const getPostsBySender = async (req, res) => {
     }
   };
 
-export {addNewPost, getAllPosts, getPostById, getPostsBySender}
+const updatePost = async (req, res) => {
+    const postId = req.params.id;
+    const updatedContent = req.body.content;
+    if (!updatedContent) return res.status(400).json({ error: 'New content is required' });
+  
+    try {
+      const updatedPost = await postModel.findByIdAndUpdate(
+        postId,
+        {content: updatedContent},
+        {new: true}
+      );
+
+      if (updatedPost) res.status(200).json(updatedPost);
+      else res.status(404).send("Post not found");
+
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  };
+
+export {addNewPost, getAllPosts, getPostById, getPostsBySender, updatePost}
