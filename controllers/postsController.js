@@ -12,12 +12,23 @@ const addNewPost = async (req, res) => {
 };
 
 const getAllPosts = async (req, res) => {
+  const postSender = req.query.sender;
+
+  if (postSender) {
     try {
-        const posts = await postModel.find();
-        res.send(posts);
+      const senderPosts = await postModel.find({senderID: postSender});
+      res.send(senderPosts);
     } catch (error) {
-        res.status(400).send(error.message);
+      res.status(400).send(error.message);
     }
+  } else {
+    try {
+      const posts = await postModel.find();
+      res.send(posts);
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  }
 };
 
 const getPostById = async (req, res) => {
@@ -29,18 +40,6 @@ const getPostById = async (req, res) => {
       if (post) res.send(post);
       else res.status(404).send("Post not found");
 
-    } catch (error) {
-      res.status(400).send(error.message);
-    }
-  };
-
-const getPostsBySender = async (req, res) => {
-    const postSender = req.query.sender;
-    if (!postSender) return res.status(400).json({ error: 'Sender ID is required' });
-  
-    try {
-      const senderPosts = await postModel.find({senderID: postSender});
-      res.send(senderPosts);
     } catch (error) {
       res.status(400).send(error.message);
     }
@@ -66,4 +65,4 @@ const updatePost = async (req, res) => {
     }
   };
 
-export {addNewPost, getAllPosts, getPostById, getPostsBySender, updatePost}
+export {addNewPost, getAllPosts, getPostById, updatePost}
