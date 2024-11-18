@@ -1,0 +1,30 @@
+###
+
+GET http://localhost:3000/posts
+
+###
+
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+"title": "Hello", "owner": "Kevin", "content": "Hello World...", "senderID": 1234
+}
+
+###
+
+GET http://localhost:3000/posts/673ba77324ef1f894b93ab5c
+
+
+###
+
+get http://localhost:3000/posts?sender=1234
+
+###
+
+put http://localhost:3000/posts/673ba7985fba802be75216a7
+Content-Type: application/json
+
+{
+"content": "how are you?"
+}
