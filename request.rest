@@ -28,3 +28,16 @@ Content-Type: application/json
 {
 "content": "how are you?"
 }
+###
+
+POST http://localhost:3000/comments
+Content-Type: application/json
+
+{
+"postID": "673ba77324ef1f894b93ab5c", "text": "my first comment"
+}
+
+###
+
+GET http://localhost:3000/comments/673d0828f3a02c67a486cc2d
+
