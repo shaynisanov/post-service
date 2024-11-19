@@ -8,7 +8,7 @@ POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
-"title": "Hello", "owner": "Kevin", "content": "Hello World...", "senderID": 1234
+"title": "Hello", "content": "Hello World...", "senderID": 1234
 }
 
 ###
@@ -22,7 +22,7 @@ get http://localhost:3000/posts?sender=1234
 
 ###
 
-put http://localhost:3000/posts/673ba7985fba802be75216a7
+put http://localhost:3000/posts/673cc7eac7fbea4caffedf73
 Content-Type: application/json
 
 {

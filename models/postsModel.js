@@ -10,10 +10,6 @@ const postSchema = new Schema({
         type: Number,
         required: true,
     },
-    owner: {
-        type: String,
-        required: true,
-    },
 });
 
 const postModel = model("Posts", postSchema);
