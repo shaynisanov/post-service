@@ -10,14 +10,14 @@ Content-Type: application/json
 {
   "title": "Hello",
   "content": "Hello World...",
-  "senderID": 1234
+  "senderId": 1234
 }
 
 ### get a post by id
 
 GET http://localhost:3000/posts/673ba77324ef1f894b93ab5c
 
-### get posts by senderID
+### get posts by senderId
 
 GET http://localhost:3000/posts?sender=1234
 
@@ -46,7 +46,7 @@ GET http://localhost:3000/comments
 
 ### get all comments of a post
 
-GET http://localhost:3000/comments?postID=673ba77324ef1f894b94ab5c
+GET http://localhost:3000/comments?postId=673ba77324ef1f894b94ab5c
 
 ### get comment by id
 
