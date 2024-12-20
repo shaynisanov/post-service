@@ -1,8 +1,8 @@
 import express, {Express} from 'express';
 import mongoose from 'mongoose';
 import {json, urlencoded} from 'body-parser';
-import {postRouter} from './routes/postsRoutes.js';
-import {commentRouter} from './routes/commentsRoutes.js';
+import {postRouter} from './routes/postsRoutes';
+import {commentRouter} from './routes/commentsRoutes';
 import 'dotenv/config';
 
 const app = express();

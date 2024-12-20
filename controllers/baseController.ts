@@ -20,22 +20,6 @@ class BaseController<T> {
         }
     };
 
-    async getAll(req: Request, res: Response) {
-        const filter = req.query.filter;
-
-        try {
-            if (filter) {
-                const item = await this.model.find({ owner: filter });
-                res.send(item);
-            } else {
-                const items = await this.model.find();
-                res.send(items);
-            }
-        } catch (error) {
-            res.status(400).send(error);
-        }
-    };
-
     async getById(req: Request, res: Response) {
         const id = req.params.id;
 
@@ -54,7 +38,7 @@ class BaseController<T> {
         const updatedContent = req.body.content;
 
         if (!updatedContent)
-          return res.status(400).json({error: 'New content is required'});
+          res.status(400).json({error: 'New content is required'});
       
         try {
           const updatedItem = await this.model.findByIdAndUpdate(

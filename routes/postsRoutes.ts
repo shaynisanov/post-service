@@ -1,17 +1,12 @@
 import * as express from 'express';
-import {
-  getAllPosts,
-  addNewPost,
-  getPostById,
-  updatePost,
-} from '../controllers/postsController.js';
+import postsController from '../controllers/postsController';
 
 const router = express.Router();
 
-router.get('/', getAllPosts);
-router.post('/', addNewPost);
-router.get('/:id', getPostById);
-// @ts-ignore
-router.put('/:id', updatePost);
+router.get('/', postsController.getAll.bind(postsController));
+router.post('/', postsController.create.bind(postsController));
+router.get('/:id', postsController.getById.bind(postsController));
+router.put('/:id', postsController.updateItem.bind(postsController));
+router.delete('/:id', postsController.deleteItem.bind(postsController));
 
 export {router as postRouter};
