@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import {json, urlencoded} from 'body-parser';
 import {postRouter} from './routes/postsRoutes';
 import {commentRouter} from './routes/commentsRoutes';
+import {userRouter} from './routes/usersRoutes';
 import 'dotenv/config';
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(json());
 app.use(urlencoded({extended: true}));
 app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
+app.use("/users", userRouter);
 
 const initializeExpress = () =>
   new Promise<Express>((resolve, reject) => {
