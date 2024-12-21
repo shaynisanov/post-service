@@ -10,25 +10,28 @@ Content-Type: application/json
 {
   "title": "Hello",
   "content": "Hello World...",
-  "senderId": 1234
+  "senderId": 12345
 }
 
 ### get a post by id
 
-GET http://localhost:3000/posts/673ba77324ef1f894b93ab5c
+GET http://localhost:3000/posts/6766a618ae43ada7486ebcd9
 
 ### get posts by senderId
 
-GET http://localhost:3000/posts?sender=1234
+GET http://localhost:3000/posts?filter=123
 
 ### update post
 
-PUT http://localhost:3000/posts/673cc7eac7fbea4caffedf73
+PUT http://localhost:3000/posts/6766a606ae43ada7486ebcd1
 Content-Type: application/json
 
 {
   "content": "how are you?"
 }
+
+### update post
+DELETE http://localhost:3000/posts/6765bb790db1b151cd5032e3
 
 ### add a comment to a post
 
@@ -36,8 +39,8 @@ POST http://localhost:3000/comments
 Content-Type: application/json
 
 {
-  "postID": "673ba77324ef1f894b94ab5c",
-  "text": "my first comment"
+  "postId": "6766a606ae43ada7486ebcd1",
+  "content": "my first comment"
 }
 
 ### get all comments
@@ -46,21 +49,47 @@ GET http://localhost:3000/comments
 
 ### get all comments of a post
 
-GET http://localhost:3000/comments?postId=673ba77324ef1f894b94ab5c
+GET http://localhost:3000/comments?filter=6766a606ae43ada7486ebcd1
 
 ### get comment by id
 
-GET http://localhost:3000/comments/67407fb682e62f778cd36031
+GET http://localhost:3000/comments/6765c0f4ab06290e54a37632
 
 ### update comment
 
-PUT http://localhost:3000/comments/67407fb682e62f778cd36031
+PUT http://localhost:3000/comments/6766a66dae43ada7486ebce6
 Content-Type: application/json
 
 {
-  "text": "my edited comment"
+  "content": "my edited comment"
 }
 
 ### delete comment
 
-DELETE http://localhost:3000/comments/67407fb682e62f778cd36031
+DELETE http://localhost:3000/comments/6765c0f4ab06290e54a37632
+
+### register user
+
+POST http://localhost:3000/users/register
+Content-Type: application/json
+
+{
+  "username": "shay",
+  "email": "shay@gmail.com",
+  "password": "1234"
+}
+
+### login user
+
+POST http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+  "username": "shay",
+  "email": "shay@gmail.com",
+  "password": "1234"
+}
+
+### logout user
+
+POST http://localhost:3000/users/logout

@@ -2,7 +2,7 @@ import mongoose, {model, Schema, Types} from 'mongoose';
 
 interface IComments {
   postId: Types.ObjectId;
-  text: string;
+  content: string;
 }
 
 const commentSchema = new Schema<IComments>({
@@ -11,7 +11,7 @@ const commentSchema = new Schema<IComments>({
     ref: 'Posts',
     required: true,
   },
-  text: {
+  content: {
     type: String,
     required: true,
   },
