@@ -6,6 +6,7 @@ GET http://localhost:3000/posts
 
 POST http://localhost:3000/posts
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY5ZDQ1ZDMxMzBiODUwOGQwZjFlYmMiLCJyYW5kb20iOiIwLjk0OTkyNjQ0NTE2ODk0OTgiLCJpYXQiOjE3MzQ5ODk1NDYsImV4cCI6MTczNDk4OTcyNn0.i23VqTkbpThPQlWToa7QUex4iVuJX2Xqlv5F7H3gtKE
 
 {
   "title": "Hello",
@@ -25,6 +26,7 @@ GET http://localhost:3000/posts?filter=123
 
 PUT http://localhost:3000/posts/6766a606ae43ada7486ebcd1
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY5ZDQ1ZDMxMzBiODUwOGQwZjFlYmMiLCJyYW5kb20iOiIwLjk0OTkyNjQ0NTE2ODk0OTgiLCJpYXQiOjE3MzQ5ODk1NDYsImV4cCI6MTczNDk4OTcyNn0.i23VqTkbpThPQlWToa7QUex4iVuJX2Xqlv5F7H3gtKE
 
 {
   "content": "how are you?"
@@ -32,11 +34,13 @@ Content-Type: application/json
 
 ### update post
 DELETE http://localhost:3000/posts/6765bb790db1b151cd5032e3
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY5ZDQ1ZDMxMzBiODUwOGQwZjFlYmMiLCJyYW5kb20iOiIwLjk0OTkyNjQ0NTE2ODk0OTgiLCJpYXQiOjE3MzQ5ODk1NDYsImV4cCI6MTczNDk4OTcyNn0.i23VqTkbpThPQlWToa7QUex4iVuJX2Xqlv5F7H3gtKE
 
 ### add a comment to a post
 
 POST http://localhost:3000/comments
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY5ZDQ1ZDMxMzBiODUwOGQwZjFlYmMiLCJyYW5kb20iOiIwLjk0OTkyNjQ0NTE2ODk0OTgiLCJpYXQiOjE3MzQ5ODk1NDYsImV4cCI6MTczNDk4OTcyNn0.i23VqTkbpThPQlWToa7QUex4iVuJX2Xqlv5F7H3gtKE
 
 {
   "postId": "6766a606ae43ada7486ebcd1",
@@ -59,6 +63,7 @@ GET http://localhost:3000/comments/6765c0f4ab06290e54a37632
 
 PUT http://localhost:3000/comments/6766a66dae43ada7486ebce6
 Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY5ZDQ1ZDMxMzBiODUwOGQwZjFlYmMiLCJyYW5kb20iOiIwLjk0OTkyNjQ0NTE2ODk0OTgiLCJpYXQiOjE3MzQ5ODk1NDYsImV4cCI6MTczNDk4OTcyNn0.i23VqTkbpThPQlWToa7QUex4iVuJX2Xqlv5F7H3gtKE
 
 {
   "content": "my edited comment"
@@ -67,6 +72,7 @@ Content-Type: application/json
 ### delete comment
 
 DELETE http://localhost:3000/comments/6765c0f4ab06290e54a37632
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY5ZDQ1ZDMxMzBiODUwOGQwZjFlYmMiLCJyYW5kb20iOiIwLjk0OTkyNjQ0NTE2ODk0OTgiLCJpYXQiOjE3MzQ5ODk1NDYsImV4cCI6MTczNDk4OTcyNn0.i23VqTkbpThPQlWToa7QUex4iVuJX2Xqlv5F7H3gtKE
 
 ### register user
 
@@ -74,7 +80,6 @@ POST http://localhost:3000/users/register
 Content-Type: application/json
 
 {
-  "username": "shay",
   "email": "shay@gmail.com",
   "password": "1234"
 }
@@ -85,7 +90,6 @@ POST http://localhost:3000/users/login
 Content-Type: application/json
 
 {
-  "username": "shay",
   "email": "shay@gmail.com",
   "password": "1234"
 }
@@ -93,3 +97,12 @@ Content-Type: application/json
 ### logout user
 
 POST http://localhost:3000/users/logout
+
+### refresh user token
+
+POST http://localhost:3000/users/refresh-token
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NzY5ZDQ1ZDMxMzBiODUwOGQwZjFlYmMiLCJyYW5kb20iOiIwLjk0OTkyNjQ0NTE2ODk0OTgiLCJpYXQiOjE3MzQ5ODk1NDYsImV4cCI6MTczNTU5NDM0Nn0._BAEqV-gMJKw1qf1JYQMTX2qHDJMQAxkh4CdzHXemKw"
+}
