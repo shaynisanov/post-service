@@ -1,9 +1,9 @@
-import {model, Schema} from 'mongoose';
+import {model, Schema, Types} from 'mongoose';
 
 interface IPost {
   title: string;
   content: string;
-  senderId: number;
+  userId: Types.ObjectId;
 }
 
 const postSchema = new Schema<IPost>({
@@ -12,8 +12,9 @@ const postSchema = new Schema<IPost>({
     required: true,
   },
   content: String,
-  senderId: {
-    type: Number,
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
     required: true,
   },
 });

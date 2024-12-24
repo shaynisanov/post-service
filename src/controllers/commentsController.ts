@@ -2,13 +2,14 @@ import {Request, Response} from 'express';
 import {commentModel, IComments} from '../models/commentsModel';
 import {postModel} from '../models/postsModel';
 import {BaseController} from './baseController';
+import {RequestWithUserId} from '../types/request';
 
 class CommentsController extends BaseController<IComments> {
   constructor() {
     super(commentModel);
   }
 
-  async create(req: Request, res: Response) {
+  async create(req: RequestWithUserId, res: Response) {
     const postId = req.body.postId;
 
     try {

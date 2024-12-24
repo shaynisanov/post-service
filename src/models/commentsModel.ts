@@ -1,14 +1,20 @@
-import mongoose, {model, Schema, Types} from 'mongoose';
+import {model, Schema, Types} from 'mongoose';
 
 interface IComments {
   postId: Types.ObjectId;
+  userId: Types.ObjectId;
   content: string;
 }
 
 const commentSchema = new Schema<IComments>({
   postId: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'Posts',
+    required: true,
+  },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Users',
     required: true,
   },
   content: {

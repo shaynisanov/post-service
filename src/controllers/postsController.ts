@@ -12,7 +12,7 @@ class PostsController extends BaseController<IPost> {
 
     try {
       if (filter) {
-        const items = await this.model.find({senderId: filter});
+        const items = await this.model.find({userId: filter});
         res.send(items);
       } else {
         const items = await this.model.find();

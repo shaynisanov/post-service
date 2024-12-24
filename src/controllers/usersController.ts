@@ -2,16 +2,27 @@ import {NextFunction, Request, Response} from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import {userModel} from '../models/usersModel';
+import {RequestWithUserId} from '../types/request';
 
 const INVALID_CREDENTIALS = 'Invalid login credentials';
 const INTERNAL_ERROR = 'Internal Server Error';
 const INVALID_REFRESH_TOKEN = 'Invalid refresh token';
+const EMAIL_ALREADY_REGISTERED = 'Given email was already registered';
 const ACCESS_DENIED = 'Access Denied';
 
 const register = async (req: Request, res: Response) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+    const isEmailAlreadyRegistered = await userModel.find({
+      email: req.body.email,
+    });
+
+    if (isEmailAlreadyRegistered) {
+      res.status(400).send(EMAIL_ALREADY_REGISTERED);
+      return;
+    }
 
     const user = await userModel.create({
       email: req.body.email,
@@ -199,7 +210,7 @@ const refreshUserToken = async (req: Request, res: Response) => {
 };
 
 const authMiddleware = async (
-  req: Request,
+  req: RequestWithUserId,
   res: Response,
   next: NextFunction
 ) => {
@@ -213,8 +224,10 @@ const authMiddleware = async (
 
   const user = await getUserByJwtToken(token);
 
-  if (user) next();
-  else res.status(401).send(ACCESS_DENIED);
+  if (user) {
+    req.body.userId = user._id;
+    next();
+  } else res.status(401).send(ACCESS_DENIED);
 };
 
 export {register, login, logout, refreshUserToken, authMiddleware};

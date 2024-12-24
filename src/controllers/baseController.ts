@@ -1,5 +1,6 @@
 import {Request, Response} from 'express';
 import {Model} from 'mongoose';
+import {RequestWithUserId} from '../types/request';
 
 class BaseController<T> {
   model: Model<T>;
@@ -8,7 +9,7 @@ class BaseController<T> {
     this.model = model;
   }
 
-  async create(req: Request, res: Response) {
+  async create(req: RequestWithUserId, res: Response) {
     const body = req.body;
 
     try {
@@ -32,7 +33,7 @@ class BaseController<T> {
     }
   }
 
-  async updateItem(req: Request, res: Response) {
+  async updateItem(req: RequestWithUserId, res: Response) {
     const Id = req.params.id;
     const updatedContent = req.body.content;
 
@@ -53,7 +54,7 @@ class BaseController<T> {
     }
   }
 
-  async deleteItem(req: Request, res: Response) {
+  async deleteItem(req: RequestWithUserId, res: Response) {
     const id = req.params.id;
 
     try {
