@@ -14,12 +14,9 @@ const register = async (req: Request, res: Response) => {
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    const existingUser = await userModel.exists({email: req.body.email});
 
-    const isEmailAlreadyRegistered = await userModel.find({
-      email: req.body.email,
-    });
-
-    if (isEmailAlreadyRegistered) {
+    if (existingUser !== null) {
       res.status(400).send(EMAIL_ALREADY_REGISTERED);
       return;
     }
