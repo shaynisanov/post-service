@@ -16,7 +16,7 @@ app.use(json());
 app.use(urlencoded({extended: true}));
 app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
-app.use("/users", userRouter);
+app.use('/users', userRouter);
 
 const initializeExpress = () =>
   new Promise<Express>((resolve, reject) => {
