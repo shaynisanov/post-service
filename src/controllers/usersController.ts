@@ -68,7 +68,7 @@ const login = async (req: Request, res: Response) => {
     const user = await userModel.findOne({email: req.body.email});
 
     if (!user) {
-      res.status(400).send(INVALID_CREDENTIALS);
+      res.status(401).send(INVALID_CREDENTIALS);
       return;
     }
 
@@ -78,7 +78,7 @@ const login = async (req: Request, res: Response) => {
     );
 
     if (!validPassword) {
-      res.status(400).send(INVALID_CREDENTIALS);
+      res.status(401).send(INVALID_CREDENTIALS);
       return;
     }
 
@@ -156,7 +156,7 @@ const logout = async (req: Request, res: Response) => {
     const isRefreshTokenValid = await verifyRefreshToken(req.body.refreshToken);
 
     if (!isRefreshTokenValid) {
-      res.status(400).send(INVALID_REFRESH_TOKEN);
+      res.status(401).send(INVALID_REFRESH_TOKEN);
       return;
     }
 
