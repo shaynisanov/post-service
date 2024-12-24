@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
-import {postModel, IPost} from '../models/postsModel.js';
-import {BaseController} from './baseController.js';
+import {BaseController} from './baseController';
+import {IPost, postModel} from '../models/postsModel';
 
 class PostsController extends BaseController<IPost> {
   constructor() {
