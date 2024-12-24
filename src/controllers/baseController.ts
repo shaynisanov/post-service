@@ -34,18 +34,15 @@ class BaseController<T> {
   }
 
   async updateItem(req: RequestWithUserId, res: Response) {
-    const Id = req.params.id;
-    const updatedContent = req.body.content;
+    const id = req.params.id;
+    const newValue = req.body;
 
-    if (!updatedContent)
-      res.status(400).json({error: 'New content is required'});
+    if (!newValue) res.status(400).json({error: 'New value is required'});
 
     try {
-      const updatedItem = await this.model.findByIdAndUpdate(
-        Id,
-        {content: updatedContent},
-        {new: true}
-      );
+      const updatedItem = await this.model.findByIdAndUpdate(id, newValue, {
+        new: true,
+      });
 
       if (updatedItem) res.status(200).json(updatedItem);
       else res.status(404).send('Item not found');
