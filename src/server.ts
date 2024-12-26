@@ -5,6 +5,8 @@ import {postRouter} from './routes/postsRoutes';
 import {commentRouter} from './routes/commentsRoutes';
 import {userRouter} from './routes/usersRoutes';
 import 'dotenv/config';
+import swaggerUI from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
 
 const app = express();
 
@@ -17,6 +19,22 @@ app.use(urlencoded({extended: true}));
 app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
 app.use('/users', userRouter);
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Posts Server REST API",
+      version: "1.0.0",
+      description: "Posts REST server including authentication using JWT",
+    },
+    servers: [{ url: "http://localhost:3000", },],
+  },
+  apis: ["./src/routes/*.ts"],
+};
+const specs = swaggerJsDoc(options);
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+ 
 
 const initializeExpress = () =>
   new Promise<Express>((resolve, reject) => {
