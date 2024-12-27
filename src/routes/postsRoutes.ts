@@ -46,8 +46,7 @@ const router = express.Router();
  *   get:
  *     summary: Get all posts
  *     description: Retrieve a list of all posts
- *     tags:
- *       - Posts
+ *     tags: [Posts]
  *     responses:
  *       200:
  *         description: A list of posts
@@ -68,15 +67,14 @@ router.get('/', postsController.getAll.bind(postsController));
  *   get:
  *     summary: Get a post by ID
  *     description: Retrieve a single post by its ID
- *     tags:
- *       - Posts
+ *     tags: [Posts]
  *     parameters:
  *       - in: path
  *         name: id
- *         schema:
- *           type: string
  *         required: true
  *         description: The ID of the post
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: A single post
@@ -97,8 +95,7 @@ router.get('/:id', postsController.getById.bind(postsController));
  *   post:
  *     summary: Create a new post
  *     description: Create a new post
- *     tags:
- *       - Posts
+ *     tags: [Posts]
  *     security:
  *       - bearerUser: []
  *     requestBody:
@@ -125,7 +122,7 @@ router.get('/:id', postsController.getById.bind(postsController));
  *             schema:
  *               $ref: '#/components/schemas/Post'
  *       400:
- *         description: Invalid input
+ *         description: Bad request (missing or invalid data)
  *       500:
  *         description: Server error
  */
@@ -133,34 +130,33 @@ router.post('/', authMiddleware, postsController.create.bind(postsController));
 
 /**
  * @swagger
- * posts/{id}:
+ * /posts/{id}:
  *   put:
  *     summary: Update a post by ID
  *     description: Update the details of a single post by its ID
- *     tags:
- *       - Posts
+ *     tags: [Posts]
  *     security:
  *       - bearerUser: []
  *     parameters:
  *       - in: path
  *         name: id
+ *         required: true
+ *         description: The ID of the post to update
  *         schema:
  *           type: string
- *         required: true
- *         description: The ID of the post
- *       - in: body
- *         name: post
- *         description: The post object that needs to be updated
- *         required: true
- *         schema:
- *           type: object
- *           properties:
- *             title:
- *               type: string
- *               description: The title of the post
- *             content:
- *               type: string
- *               description: The content of the post
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The updated title of the post
+ *               content:
+ *                 type: string
+ *                 description: The updated content of the post
  *     responses:
  *       200:
  *         description: Post updated successfully
@@ -179,21 +175,20 @@ router.put(
 
 /**
  * @swagger
- * posts/{id}:
+ * /posts/{id}:
  *   delete:
  *     summary: Delete a post by ID
  *     description: Delete a single post by its ID
- *     tags:
- *       - Posts
+ *     tags: [Posts]
  *     security:
  *       - bearerUser: []
  *     parameters:
  *       - in: path
  *         name: id
- *         schema:
- *           type: string
  *         required: true
  *         description: The ID of the post
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
  *         description: Post deleted successfully

@@ -49,6 +49,27 @@ const router = Router();
 
 /**
 * @swagger
+* components:
+*   schemas:
+*     Tokens:
+*       type: object
+*       required:
+*         - accessToken
+*         - refreshToken
+*       properties:
+*         accessToken:
+*           type: string
+*           description: The JWT access token
+*         refreshToken:
+*           type: string
+*           description: The JWT refresh token
+*       example:
+*         accessToken: '123cd123x1xx1'
+*         refreshToken: '134r2134cr1x3c'
+*/
+
+/**
+* @swagger
 * /users/register:
 *   post:
 *     summary: registers a new user
@@ -75,8 +96,7 @@ router.post('/register', register);
  *   post:
  *     summary: User login
  *     description: Authenticate user and return tokens
- *     tags:
- *       - User
+ *     tags: [User]
  *     requestBody:
  *       required: true
  *       content:
@@ -89,17 +109,7 @@ router.post('/register', register);
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 accessToken:
- *                   type: string
- *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
- *                 refreshToken:
- *                   type: string
- *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
- *                 _id:
- *                   type: string
- *                   example: 60d0fe4f5311236168a109ca
+ *               $ref: '#/components/schemas/Tokens'
  *       400:
  *         description: Invalid credentials or request
  *       500:
@@ -113,8 +123,9 @@ router.post('/login', login);
  *   post:
  *     summary: User logout
  *     description: Logout user and invalidate the refresh token
- *     tags:
- *       - User
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -141,8 +152,9 @@ router.post('/logout', logout);
  *   post:
  *     summary: Refresh tokens
  *     description: Refresh access and refresh tokens using the provided refresh token
- *     tags:
- *       - User
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:

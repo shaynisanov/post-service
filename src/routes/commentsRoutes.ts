@@ -47,8 +47,7 @@ const router = Router();
  *   get:
  *     summary: Get all comments
  *     description: Retrieve a list of all comments
- *     tags:
- *       - Comments
+ *     tags: [Comments]
  *     responses:
  *       200:
  *         description: List of comments retrieved successfully
@@ -57,20 +56,7 @@ const router = Router();
  *             schema:
  *               type: array
  *               items:
- *                 type: object
- *                 properties:
- *                   _id:
- *                     type: string
- *                     description: The auto-generated id of the comment
- *                   postId:
- *                     type: string
- *                     description: The id of the post
- *                   userId:
- *                     type: string
- *                     description: The id of the user
- *                   content:
- *                     type: string
- *                     description: The content of the post
+ *                 $ref: '#/components/schemas/Comment'
  *       500:
  *         description: Server error
  */
@@ -82,8 +68,7 @@ router.get('/', commentsController.getAll.bind(commentsController));
  *   get:
  *     summary: Get a comment by ID
  *     description: Retrieve a single comment by its ID
- *     tags:
- *       - Comments
+ *     tags: [Comments]
  *     parameters:
  *       - in: path
  *         name: id
@@ -97,20 +82,7 @@ router.get('/', commentsController.getAll.bind(commentsController));
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 _id:
- *                   type: string
- *                   description: The auto-generated id of the comment
- *                 postId:
- *                   type: string
- *                   description: The id of the post
- *                 userId:
- *                   type: string
- *                   description: The id of the user
- *                 content:
- *                   type: string
- *                   description: The content of the post
+ *               $ref: '#/components/schemas/Comment'
  *       404:
  *         description: Comment not found
  *       500:
@@ -124,8 +96,7 @@ router.get('/:id', commentsController.getById.bind(commentsController));
  *   post:
  *     summary: Create a new comment
  *     description: Create a new comment on a post
- *     tags:
- *       - Comments
+ *     tags: [Comments]
  *     security:
  *       - bearerUser: []
  *     requestBody:
@@ -141,13 +112,18 @@ router.get('/:id', commentsController.getById.bind(commentsController));
  *               content:
  *                 type: string
  *                 description: The content of the comment
+ *             required:
+ *               - postId
+ *               - content
  *     responses:
  *       201:
  *         description: Comment created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Comment'
  *       400:
  *         description: Bad request (missing or invalid data)
- *       401:
- *         description: Unauthorized (user needs to be authenticated)
  *       500:
  *         description: Server error
  */
@@ -163,8 +139,7 @@ router.post(
  *   put:
  *     summary: Update a comment by ID
  *     description: Update the content of a comment by its ID
- *     tags:
- *       - Comments
+ *     tags: [Comments]
  *     security:
  *       - bearerUser: []
  *     parameters:
@@ -189,8 +164,6 @@ router.post(
  *         description: Comment updated successfully
  *       400:
  *         description: Bad request (invalid data)
- *       401:
- *         description: Unauthorized (user needs to be authenticated)
  *       404:
  *         description: Comment not found
  *       500:
@@ -208,8 +181,7 @@ router.put(
  *   delete:
  *     summary: Delete a comment by ID
  *     description: Delete a comment by its ID
- *     tags:
- *       - Comments
+ *     tags: [Comments]
  *     security:
  *       - bearerUser: []
  *     parameters:
