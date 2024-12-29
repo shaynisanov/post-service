@@ -5,6 +5,7 @@ import {postRouter} from './routes/postsRoutes';
 import {commentRouter} from './routes/commentsRoutes';
 import {userRouter} from './routes/usersRoutes';
 import 'dotenv/config';
+import {setupSwagger} from './swaggerConfig';
 
 const app = express();
 
@@ -17,6 +18,8 @@ app.use(urlencoded({extended: true}));
 app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
 app.use('/users', userRouter);
+ 
+setupSwagger(app);
 
 const initializeExpress = () =>
   new Promise<Express>((resolve, reject) => {
