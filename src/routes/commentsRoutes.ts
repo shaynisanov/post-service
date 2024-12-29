@@ -19,7 +19,6 @@ const router = Router();
  *       type: object
  *       required:
  *         - postId
- *         - userId
  *         - content
  *       properties:
  *         _id:
@@ -28,16 +27,12 @@ const router = Router();
  *         postId:
  *           type: string
  *           description: The id of the post that the comment belongs to
- *         userId:
- *           type: string
- *           description: The id of the user who created the comment
  *         content:
  *           type: string
  *           description: The content of the comment
  *       example:
  *         _id: 62a1c60e8d0a5c6fa1cdbad7
  *         postId: 62a1c60e8d0a5c6fa1cdbad6
- *         userId: 324vt23r4tr234t245tbv45by
  *         content: This is a comment on the post.
  */
 
